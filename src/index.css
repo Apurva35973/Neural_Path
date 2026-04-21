@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@theme {
+  --color-scheme: light dark;
+}
+
+/* Explicitly tell Tailwind 4 to use the .dark class for dark: variants */
+@variant dark (&:where(.dark, .dark *));
+
+@utility transition-theme {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Force body colors based on root class as a fallback */
+@layer base {
+  html {
+     @apply transition-theme;
+  }
+  
+  html.dark body {
+    background-color: var(--color-slate-950);
+    color: var(--color-slate-100);
+  }
+}
